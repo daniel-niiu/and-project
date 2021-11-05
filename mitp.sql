@@ -77,7 +77,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `category`, `price`, `volu
 (1004, 'Quartz 9000 5W40/5W50/0W40', 'Fully Synthetic', '75.00', '1.00'),
 (1005, 'Quartz 9000 5W40/5W50/0W40', 'Fully Synthetic', '261.00', '4.00'),
 (1006, 'Quartz 9000 Energy 0W40', 'Fully Synthetic', '281.00', '4.00'),
-(1007, 'Quartz 8000 Futute GF6 5W30', 'Fully Synthetic', '179.00', '4.00'),
+(1007, 'Quartz 8000 Future GF6 5W30', 'Fully Synthetic', '179.00', '4.00'),
 (1008, 'Quartz 8000 Future GF6 0W20', 'Fully Synthetic', '154.00', '3.00'),
 (1009, 'Quartz 8000 5W40', 'Fully Synthetic', '172.00', '4.00'),
 (1010, 'Quartz Racing 10W60', 'Fully Synthetic', '76.00', '1.00'),
