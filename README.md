@@ -1,2 +1,15 @@
-# and-project
-SWE30010 Managing IT Projects: Developing a Stock Inventory Reporting and Prediction System for Safeway Solutions Sdn Bhd.
+# Secure Login system using PHP with MYSQL database
+
+version: 1.0.0
+
+### UserName : eliasfsdev@gmail.com
+
+### Password : 12345
+
+## Full Tutorial
+
+[On Youtube](https://youtu.be/TytaDtwnj0o)
+
+## Authors
+
+[Elias Abdurrahman](https://github.com/codingWithElias)
