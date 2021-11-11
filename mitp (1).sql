@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2021 at 11:49 AM
+-- Generation Time: Nov 11, 2021 at 06:32 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -24,6 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `area`
+--
+
+CREATE TABLE `area` (
+  `sales_total` decimal(10,0) NOT NULL,
+  `sales_location` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `displaysales`
 --
 
@@ -31,7 +43,31 @@ CREATE TABLE `displaysales` (
   `sales_location` varchar(50) NOT NULL,
   `sales_total` decimal(10,2) NOT NULL,
   `sales_date` datetime NOT NULL,
-  `product_name` varchar(50) NOT NULL
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `festival`
+--
+
+CREATE TABLE `festival` (
+  `sales_total` decimal(10,0) NOT NULL,
+  `sales_date` datetime NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monthly`
+--
+
+CREATE TABLE `monthly` (
+  `sales_total` decimal(10,0) NOT NULL,
+  `sales_date` datetime NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -105,8 +141,8 @@ CREATE TABLE `sales` (
   `sales_quantity` int(11) NOT NULL,
   `sales_total` decimal(10,2) NOT NULL,
   `sales_location` varchar(50) NOT NULL,
-  `product_name` varchar(50) NOT NULL,
-  `staff_username` varchar(50) NOT NULL
+  `staff_username` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -119,6 +155,126 @@ CREATE TABLE `salesadvisor` (
   `staff_username` varchar(50) NOT NULL,
   `staff_password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yearly`
+--
+
+CREATE TABLE `yearly` (
+  `sales_total` decimal(10,0) NOT NULL,
+  `sales_date` datetime NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `area`
+--
+ALTER TABLE `area`
+  ADD KEY `sales_location` (`sales_location`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `displaysales`
+--
+ALTER TABLE `displaysales`
+  ADD PRIMARY KEY (`sales_location`),
+  ADD KEY `sales_date` (`sales_date`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `festival`
+--
+ALTER TABLE `festival`
+  ADD KEY `sales_date` (`sales_date`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `monthly`
+--
+ALTER TABLE `monthly`
+  ADD KEY `sales_date` (`sales_date`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`sales_date`),
+  ADD KEY `sales_location` (`sales_location`),
+  ADD KEY `staff_username` (`staff_username`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `salesadvisor`
+--
+ALTER TABLE `salesadvisor`
+  ADD PRIMARY KEY (`staff_username`);
+
+--
+-- Indexes for table `yearly`
+--
+ALTER TABLE `yearly`
+  ADD KEY `sales_date` (`sales_date`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `area`
+--
+ALTER TABLE `area`
+  ADD CONSTRAINT `area_ibfk_1` FOREIGN KEY (`sales_location`) REFERENCES `displaysales` (`sales_location`),
+  ADD CONSTRAINT `area_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `displaysales`
+--
+ALTER TABLE `displaysales`
+  ADD CONSTRAINT `displaysales_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
+  ADD CONSTRAINT `displaysales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `festival`
+--
+ALTER TABLE `festival`
+  ADD CONSTRAINT `festival_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
+  ADD CONSTRAINT `festival_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `monthly`
+--
+ALTER TABLE `monthly`
+  ADD CONSTRAINT `monthly_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
+  ADD CONSTRAINT `monthly_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `sales`
+--
+ALTER TABLE `sales`
+  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`sales_location`) REFERENCES `displaysales` (`sales_location`),
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`staff_username`) REFERENCES `salesadvisor` (`staff_username`),
+  ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `yearly`
+--
+ALTER TABLE `yearly`
+  ADD CONSTRAINT `yearly_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
+  ADD CONSTRAINT `yearly_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
