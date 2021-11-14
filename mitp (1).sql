@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 06:32 AM
+-- Generation Time: Nov 14, 2021 at 09:58 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -28,23 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `area` (
-  `sales_total` decimal(10,0) NOT NULL,
-  `sales_location` varchar(50) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `sales_total` decimal(10,2) DEFAULT NULL,
+  `sales_location` varchar(50) DEFAULT NULL,
+  `sales_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `displaysales`
+-- Dumping data for table `area`
 --
 
-CREATE TABLE `displaysales` (
-  `sales_location` varchar(50) NOT NULL,
-  `sales_total` decimal(10,2) NOT NULL,
-  `sales_date` datetime NOT NULL,
-  `product_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `area` (`sales_total`, `sales_location`, `sales_date`) VALUES
+('15000.00', 'Sibu', '2021-11-14 16:08:03'),
+('80000.00', 'Kuching', '2021-11-14 09:08:03'),
+('32000.00', 'Miri', '2021-11-14 09:08:03'),
+('91000.00', 'Kuching', '2021-11-02 16:10:51'),
+('12300.00', 'Kota Kinabalu', '2021-11-02 16:10:51');
 
 -- --------------------------------------------------------
 
@@ -53,10 +51,24 @@ CREATE TABLE `displaysales` (
 --
 
 CREATE TABLE `festival` (
-  `sales_total` decimal(10,0) NOT NULL,
-  `sales_date` datetime NOT NULL,
-  `product_id` int(11) NOT NULL
+  `sales_total` decimal(10,2) DEFAULT NULL,
+  `sales_date` datetime DEFAULT NULL,
+  `festival` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `festival`
+--
+
+INSERT INTO `festival` (`sales_total`, `sales_date`, `festival`) VALUES
+('12890.00', '2021-02-12 16:37:20', 'Chinese New Year'),
+('21900.00', '2021-02-13 16:37:20', 'Chinese New Year'),
+('24000.00', '2021-05-13 16:38:16', 'Hari Raya'),
+('21702.00', '2021-05-14 16:39:04', 'Hari Raya'),
+('25182.00', '2021-06-01 16:39:38', 'Hari Gawai'),
+('23124.00', '2021-06-02 16:40:05', 'Hari Gawai'),
+('15093.00', '2021-12-24 16:40:29', 'Christmas'),
+('21123.00', '2021-12-25 16:40:54', 'Christmas');
 
 -- --------------------------------------------------------
 
@@ -65,10 +77,22 @@ CREATE TABLE `festival` (
 --
 
 CREATE TABLE `monthly` (
-  `sales_total` decimal(10,0) NOT NULL,
-  `sales_date` datetime NOT NULL,
-  `product_id` int(11) NOT NULL
+  `sales_total` decimal(10,2) DEFAULT NULL,
+  `sales_date` datetime DEFAULT NULL,
+  `sales_location` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `monthly`
+--
+
+INSERT INTO `monthly` (`sales_total`, `sales_date`, `sales_location`) VALUES
+('501244.00', '2021-08-27 16:42:30', 'Kuching'),
+('1101267.00', '2021-09-30 16:42:30', 'Kuching'),
+('9712401.00', '2021-10-29 16:43:51', 'Kuching'),
+('918219.00', '2021-08-27 16:45:05', 'Bintulu'),
+('173813.00', '2021-09-30 16:45:05', 'Bintulu'),
+('283681.00', '2021-10-29 16:45:47', 'Bintulu');
 
 -- --------------------------------------------------------
 
@@ -77,11 +101,11 @@ CREATE TABLE `monthly` (
 --
 
 CREATE TABLE `products` (
-  `product_id` int(10) NOT NULL,
-  `product_name` varchar(50) NOT NULL,
-  `category` varchar(50) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `volume` decimal(10,2) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `volume` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -138,12 +162,21 @@ INSERT INTO `products` (`product_id`, `product_name`, `category`, `price`, `volu
 
 CREATE TABLE `sales` (
   `sales_date` datetime NOT NULL,
-  `sales_quantity` int(11) NOT NULL,
-  `sales_total` decimal(10,2) NOT NULL,
-  `sales_location` varchar(50) NOT NULL,
-  `staff_username` varchar(50) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `sales_quantity` int(11) DEFAULT NULL,
+  `sales_total` decimal(10,2) DEFAULT NULL,
+  `sales_location` varchar(50) DEFAULT NULL,
+  `staff_username` varchar(50) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`sales_date`, `sales_quantity`, `sales_total`, `sales_location`, `staff_username`, `product_id`) VALUES
+('2021-11-01 16:29:56', 80, '11920.00', 'Kuching', 'John Doe', 1014),
+('2021-11-02 16:29:56', 121, '9075.00', 'Kuching', 'John Doe', 1004),
+('2021-11-03 16:33:58', 99, '10098.00', 'Kuching', 'John Doe', 1030);
 
 -- --------------------------------------------------------
 
@@ -153,7 +186,7 @@ CREATE TABLE `sales` (
 
 CREATE TABLE `salesadvisor` (
   `staff_username` varchar(50) NOT NULL,
-  `staff_password` varchar(50) NOT NULL
+  `staff_password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -163,118 +196,19 @@ CREATE TABLE `salesadvisor` (
 --
 
 CREATE TABLE `yearly` (
-  `sales_total` decimal(10,0) NOT NULL,
-  `sales_date` datetime NOT NULL,
-  `product_id` int(11) NOT NULL
+  `sales_total` decimal(10,2) DEFAULT NULL,
+  `sales_date` datetime DEFAULT NULL,
+  `sales_location` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `yearly`
 --
 
---
--- Indexes for table `area`
---
-ALTER TABLE `area`
-  ADD KEY `sales_location` (`sales_location`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `displaysales`
---
-ALTER TABLE `displaysales`
-  ADD PRIMARY KEY (`sales_location`),
-  ADD KEY `sales_date` (`sales_date`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `festival`
---
-ALTER TABLE `festival`
-  ADD KEY `sales_date` (`sales_date`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `monthly`
---
-ALTER TABLE `monthly`
-  ADD KEY `sales_date` (`sales_date`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `sales`
---
-ALTER TABLE `sales`
-  ADD PRIMARY KEY (`sales_date`),
-  ADD KEY `sales_location` (`sales_location`),
-  ADD KEY `staff_username` (`staff_username`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `salesadvisor`
---
-ALTER TABLE `salesadvisor`
-  ADD PRIMARY KEY (`staff_username`);
-
---
--- Indexes for table `yearly`
---
-ALTER TABLE `yearly`
-  ADD KEY `sales_date` (`sales_date`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `area`
---
-ALTER TABLE `area`
-  ADD CONSTRAINT `area_ibfk_1` FOREIGN KEY (`sales_location`) REFERENCES `displaysales` (`sales_location`),
-  ADD CONSTRAINT `area_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `displaysales`
---
-ALTER TABLE `displaysales`
-  ADD CONSTRAINT `displaysales_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
-  ADD CONSTRAINT `displaysales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `festival`
---
-ALTER TABLE `festival`
-  ADD CONSTRAINT `festival_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
-  ADD CONSTRAINT `festival_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `monthly`
---
-ALTER TABLE `monthly`
-  ADD CONSTRAINT `monthly_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
-  ADD CONSTRAINT `monthly_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `sales`
---
-ALTER TABLE `sales`
-  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`sales_location`) REFERENCES `displaysales` (`sales_location`),
-  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`staff_username`) REFERENCES `salesadvisor` (`staff_username`),
-  ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `yearly`
---
-ALTER TABLE `yearly`
-  ADD CONSTRAINT `yearly_ibfk_1` FOREIGN KEY (`sales_date`) REFERENCES `sales` (`sales_date`),
-  ADD CONSTRAINT `yearly_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+INSERT INTO `yearly` (`sales_total`, `sales_date`, `sales_location`) VALUES
+('1234567.00', '2018-12-31 16:55:42', 'Kuching'),
+('1324568.00', '2019-12-31 16:55:42', 'Kuching'),
+('1982395.00', '2020-12-31 16:56:48', 'Kuching');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
