@@ -71,38 +71,77 @@
 			
 			<br>
 			<br>
-			
-			<label for="qty"> Quantity Sold (Unit): </label>
-			<input type="number" id="qty" name="qty" min="1" max="100">
-			
-			<br>
-			<br>
-			
-			<label for="total"> Total Earned (RM): </label>
-			<!-- display total price auto (retail price x qty ) -->
-			
-			<br>
+
+			<!-- price txtbox-->
+			<label for="price"> Price of item: </label>
+			<input type ="text" id="price" name="price">
+
 			<br>
 
-			<label for="branch"> Branch Location: </label>
-			<select name="branch" id="branch">
-				<option value="Kuching"> Kuching </option>
-				<option value="Samarahan"> Samarahan </option>
-				<option value="Serian"> Serian </option>
-				<option value="SriAman"> Sri Aman </option>
-				<option value="Betong"> Betong </option>
-				<option value="Sarikei">Sarikei </option>
-				<option value="Mukah"> Mukah </option>
-				<option value="Sibu"> Sibu </option>
-				<option value="Bintulu"> Bintulu </option>
-				<option value="Miri"> Miri </option> 
-				<option value="Kapit">Kapit </option>
-				<option value="Limbang">Limbang</option>
+			<!-- qty txtbox -->
+			<label for="qty"> Quantity: </label>
+			<input type="text" name="qty" value="1"/>
+			<br>
+
+			<!-- location txtbox-->
+			<label for="branch"> Branch Location:</label>
+		    <select name="branch" id="branch">
+				<option disabled selected> -- Select Branch -- </option>
+				<optgroup label ="Sarawak">
+					<option value="Kuching"> Kuching </option>
+					<option value="Samarahan"> Samarahan </option>
+					<option value="Serian"> Serian </option>
+					<option value="SriAman"> Sri Aman </option>
+					<option value="Betong"> Betong </option>
+					<option value="Sarikei">Sarikei </option>
+					<option value="Mukah"> Mukah </option>
+					<option value="Sibu"> Sibu </option>
+					<option value="Bintulu"> Bintulu </option>
+					<option value="Miri"> Miri </option> 
+					<option value="Kapit">Kapit </option>
+					<option value="Limbang">Limbang</option>
+				</optgroup>
+				<optgroup label="Sabah">
+					<option value="Beaufort">Beaufort </option>
+					<option value="Beluran">Beluran</option>
+					<option value="Kalabakan">Kalabakan</option>
+					<option value="Keningau">Keningau</option>
+					<option value="Kinabatangan">Kinabatangan</option>
+					<option value="KotaBelud"> Kota Belud</option>
+					<option value="KotaKinabalu">Kota Kinabalu </option>
+					<option value="KotaMarudu"> Kota Marudu </option>
+					<option value="KualaPenyu"> Kuala Penyu</option>
+					<option value="Kudat"> Kudat</option>
+					<option value="Kunak"> Kunak</option>
+					<option value="LahadDatu"> Lahad Datu </option>
+					<option value="Nabawan">Nabawan</option>
+					<option value="Papar"> Papar </option>
+					<option value="Penampang">Penampang</option>
+					<option value="Pitas">Pitas </option>
+					<option value="Putatan">Putatan</option>
+					<option value="Ranau">Ranau</option>
+					<option value="Sandakan">Sandakan</option>
+					<option value="Semporna">Semporna </option>
+					<option value="Sipitang">Sipitang</option>
+					<option value="Tambunan">Tambunan</option>
+					<option value="Tawau">Tawau </option>
+					<option value="Telupid">Telupid</option>
+					<option value="Tenom">Tenom</option>
+					<option value="Tongod">Tongod</option>
+					<option value="Tuaran">Tuaran</option>
+				</optgroup>
 			</select>
 
-			<br><br>
-			<label for="date"> Today's Date: </label>
-			<input type="date" id="date" name="date">
+			<br>
+
+			<label for="total"> Total Sales: </label>
+			<input type="text" id="total" name="total">
+
+			<br>
+
+			<label for="staff"> Staff Name: </label>
+			<input type="text" id="staff" name="staff">
+
 
 			<br><br>
 			<div style="text-align:center;">
@@ -111,6 +150,37 @@
 			
 			<br><br>
 		</form>
+			
+			<?php
+			if (isset($_POST['editsales']))
+			{
+				$products = $_POST['products'];
+				$price = $_POST['price'];
+				$qty = $_POST['qty'];
+				$branch = $_POST['branch'];
+				$total = $_POST['total'];
+				$staff = $_POST['staff'];
+
+				$date = date("Y-m-d H:i:s");
+
+
+				$sql = "update sales SET sales_quantity= '$qty', sales_total='$total', staff_username = '$staff', product_name = '$products' where sales_location = '$branch'";
+
+				if(mysqli_query($conn, $sql))
+				{
+					echo "<p> Edited Sales Data Stored Sucessfully</p>";
+				}
+				else
+				{
+					echo "<p> Problem with editing sales data </p>";
+				}
+
+
+			}
+				mysqli_close($conn);
+							      
+			?>					      
+								      
 </body>
 </html>
 <?php 
