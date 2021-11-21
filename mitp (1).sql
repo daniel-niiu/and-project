@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2021 at 05:41 PM
+-- Generation Time: Nov 21, 2021 at 06:27 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -88,12 +88,10 @@ CREATE TABLE `monthly` (
 --
 
 INSERT INTO `monthly` (`sales_total`, `sales_date`, `month`, `sales_location`) VALUES
-('501244.00', '2021-08-27 16:42:30', '', 'Kuching'),
-('1101267.00', '2021-09-30 16:42:30', '', 'Kuching'),
-('9712401.00', '2021-10-29 16:43:51', '', 'Kuching'),
-('918219.00', '2021-08-27 16:45:05', '', 'Bintulu'),
-('173813.00', '2021-09-30 16:45:05', '', 'Bintulu'),
-('283681.00', '2021-10-29 16:45:47', '', 'Bintulu');
+('3192832.00', '2021-07-30 01:25:41', 'July', 'Kuching'),
+('482198.00', '2021-08-27 01:25:41', 'August', 'Kuching'),
+('328174.00', '2021-09-30 01:26:34', 'September', 'Kuching'),
+('453628.00', '2021-10-29 01:27:00', 'October', 'Kuching');
 
 -- --------------------------------------------------------
 
