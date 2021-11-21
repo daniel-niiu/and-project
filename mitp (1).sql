@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2021 at 09:58 AM
+-- Generation Time: Nov 21, 2021 at 05:41 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -79,6 +79,7 @@ INSERT INTO `festival` (`sales_total`, `sales_date`, `festival`) VALUES
 CREATE TABLE `monthly` (
   `sales_total` decimal(10,2) DEFAULT NULL,
   `sales_date` datetime DEFAULT NULL,
+  `month` varchar(50) NOT NULL,
   `sales_location` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -86,13 +87,13 @@ CREATE TABLE `monthly` (
 -- Dumping data for table `monthly`
 --
 
-INSERT INTO `monthly` (`sales_total`, `sales_date`, `sales_location`) VALUES
-('501244.00', '2021-08-27 16:42:30', 'Kuching'),
-('1101267.00', '2021-09-30 16:42:30', 'Kuching'),
-('9712401.00', '2021-10-29 16:43:51', 'Kuching'),
-('918219.00', '2021-08-27 16:45:05', 'Bintulu'),
-('173813.00', '2021-09-30 16:45:05', 'Bintulu'),
-('283681.00', '2021-10-29 16:45:47', 'Bintulu');
+INSERT INTO `monthly` (`sales_total`, `sales_date`, `month`, `sales_location`) VALUES
+('501244.00', '2021-08-27 16:42:30', '', 'Kuching'),
+('1101267.00', '2021-09-30 16:42:30', '', 'Kuching'),
+('9712401.00', '2021-10-29 16:43:51', '', 'Kuching'),
+('918219.00', '2021-08-27 16:45:05', '', 'Bintulu'),
+('173813.00', '2021-09-30 16:45:05', '', 'Bintulu'),
+('283681.00', '2021-10-29 16:45:47', '', 'Bintulu');
 
 -- --------------------------------------------------------
 
@@ -166,17 +167,23 @@ CREATE TABLE `sales` (
   `sales_total` decimal(10,2) DEFAULT NULL,
   `sales_location` varchar(50) DEFAULT NULL,
   `staff_username` varchar(50) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `product_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`sales_date`, `sales_quantity`, `sales_total`, `sales_location`, `staff_username`, `product_id`) VALUES
-('2021-11-01 16:29:56', 80, '11920.00', 'Kuching', 'John Doe', 1014),
-('2021-11-02 16:29:56', 121, '9075.00', 'Kuching', 'John Doe', 1004),
-('2021-11-03 16:33:58', 99, '10098.00', 'Kuching', 'John Doe', 1030);
+INSERT INTO `sales` (`sales_date`, `sales_quantity`, `sales_total`, `sales_location`, `staff_username`, `product_name`) VALUES
+('2021-11-01 16:29:56', 80, '11920.00', 'Kuching', 'John Doe', NULL),
+('2021-11-02 16:29:56', 121, '9075.00', 'Kuching', 'John Doe', NULL),
+('2021-11-03 16:33:58', 99, '10098.00', 'Kuching', 'John Doe', NULL),
+('2021-11-21 16:55:03', 1, '0.00', '', '', 'Quartz INEO MC3 5W30'),
+('2021-11-21 16:57:15', 1, '0.00', '', '', 'Quartz INEO MC3 5W30'),
+('2021-11-21 17:02:35', 5, '745.00', 'Sibu', 'Bella', 'Quartz 7000 15W50'),
+('2021-11-21 17:14:51', 2, '298.00', 'Sibu', 'Bella', 'Quartz 7000 15W50'),
+('2021-11-21 17:16:30', 2, '298.00', 'Sibu', 'Bella', 'Quartz 7000 15W50'),
+('2021-11-21 17:32:17', 3, '30.00', 'Beaufort', 'Bella', 'Quartz INEO MC3 5W30');
 
 -- --------------------------------------------------------
 
