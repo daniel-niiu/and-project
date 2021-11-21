@@ -18,6 +18,7 @@
 	  	      action="auth.php"
 	  	      method="post" 
 	  	      style="width: 30rem">
+	  	   <img class="text-center pb-5 display-4" src ="img/lube.png" width="100%">       
 	  		<h1 class="text-center pb-5 display-4">Safeway Solutions</h1>
 	  		<?php if (isset($_GET['error'])) { ?>
 	  		<div class="alert alert-danger" role="alert">
