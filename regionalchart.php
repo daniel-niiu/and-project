@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <?php  
-				 $connect = mysqli_connect("localhost", "root", "", "safeway");  
+				 $connect = mysqli_connect("localhost", "root", "", "company");  
 				 $query = "SELECT sales_total,sales_location FROM area group by sales_location";
 				 $result = mysqli_query($connect, $query);  
 ?>  
