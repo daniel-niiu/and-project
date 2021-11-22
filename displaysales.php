@@ -56,6 +56,7 @@
 
 				<table>
 				<tr>
+				<th>Sales ID</th>
 				<th>Product Name</th>
 				<th>Sales Date</th>
 				<th>Sales Location</th>
@@ -75,7 +76,7 @@
 				if ($result !== false && $result->num_rows > 0) {
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
-				echo "<tr><td>" . $row["product_name"]. "</td><td>" . $row["sales_date"] . "</td><td>" . $row["sales_location"] . "</td><td>" . $row["sales_total"]. "</td><td>" . $row["sales_quantity"]. "</td><td>" . $row["staff_username"]. "</td> </tr>";
+				echo "<tr><td>" . $row["sales_id"]. "</td><td>" . $row["product_name"]. "</td><td>" . $row["sales_date"] . "</td><td>" . $row["sales_location"] . "</td><td>" . $row["sales_total"]. "</td><td>" . $row["sales_quantity"]. "</td><td>" . $row["staff_username"]. "</td> </tr>";
 				}
 				echo "</table>";
 				} else { echo "0 results"; }
