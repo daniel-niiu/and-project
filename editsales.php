@@ -1,5 +1,6 @@
 <?php 
   session_start();
+  $conn =  mysqli_connect('localhost','root','', 'safeway');
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 ?>
@@ -47,29 +48,43 @@
 		<div class="d-flex justify-content-center align-items-center flex-column" style="min-height: 10vh;">
 	
 	 	<i class="bi bi-person-fill" style="font-size: 14rem"></i>
-        <h1 class="text-center display-4" style="margin-top: -60px;font-size: 2rem"><?=$_SESSION['user_full_name']?></h1>
+		<h1 class="text-center display-4" style="margin-top: -60px;font-size: 2rem"><?=$_SESSION['user_full_name']?></h1>
         <a href="logout.php" class="btn btn-warning">LOGOUT</a>
         <br>
 		
 		<h3>Edit Sales Record</h3>
 		<br>
-		<form>
-			<label form ="products">Please Select Product:</label>
+		<form action="editsales.php" method="POST">
+		
+			<label for="sid"> Sales ID: </label>
+			<select name="sid" id="sid">
+			<?php
+				$sid = $conn->query("SELECT sales_id FROM SALES");
+				
+				while ($rows1= mysqli_fetch_assoc($sid))
+				{
+					$sales_id = $rows1['sales_id'];
+					echo "<option value='$sales_id'> $sales_id </option>";
+				}
+				
+			?>
+			</select>
+			<br>
+			
+			<label for ="products">Please Select Product:</label>
 			<select name="products" id="products">
 			<?php
-				$conn =  mysqli_connect('localhost','root','', 'company');
 				$product = $conn->query("SELECT product_name FROM products");
 				
-				while($rows = $product->fetch_assoc())
+				while($rows = mysqli_fetch_assoc($product))
 				{
 					$product_name = $rows['product_name'];
 					echo "<option value='$product_name'>$product_name</option>";
-					//when click product display product code, category, price & volume
+					
 				}
 			?>
 			</select>
 			
-			<br>
 			<br>
 
 			<!-- price txtbox-->
@@ -145,14 +160,14 @@
 
 			<br><br>
 			<div style="text-align:center;">
-			<input type="submit" id="submit" name="Submit">
+			<input type="submit" id="submit" name="submit">
 			</div>
 			
 			<br><br>
 		</form>
 			
 			<?php
-			if (isset($_POST['editsales']))
+			if (isset($_POST['submit']))
 			{
 				$products = $_POST['products'];
 				$price = $_POST['price'];
@@ -162,9 +177,9 @@
 				$staff = $_POST['staff'];
 
 				$date = date("Y-m-d H:i:s");
+				$sid = $_POST['sid'];
 
-
-				$sql = "update sales SET sales_quantity= '$qty', sales_total='$total', staff_username = '$staff', product_name = '$products' where sales_location = '$branch'";
+				$sql = "update sales SET sales_quantity= '$qty', sales_total='$total', staff_username = '$staff', product_name = '$products' where sales_id = '$sid'";
 
 				if(mysqli_query($conn, $sql))
 				{

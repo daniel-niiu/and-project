@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Regional chart</title>
+	<title>Monthly chart</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
@@ -17,27 +17,28 @@
 
 <?php  
 				 $connect = mysqli_connect("localhost", "root", "", "safeway");  
-				 $query = "SELECT sales_total,sales_location FROM area group by sales_location";
+				 $query = "SELECT month,sales_total,sales_location FROM monthly group by month";
 				 $result = mysqli_query($connect, $query);  
-?>  
+  ?>
 
- 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+ 			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
            function drawChart()  
            {  
                 var data = google.visualization.arrayToDataTable([  
-                          ['Area', 'Total Sales'],  
+                          ['Month', 'Total Sales'],  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
-                               echo "['".$row["sales_location"]."', ".$row["sales_total"]."],";  
+                               echo "['".$row["month"]."', ".$row["sales_total"]."],";  
                           }  
                           ?>  
-                     ]);  
+                     ]);
+                       
                 var options = {  
-                      title: 'Percentage of sales by area',  
+                      title: 'Percentage of sales by month',  
                       //is3D:true,  
                       pieHole: 0.4  
                      };  
@@ -84,9 +85,9 @@
         <br>
 
  					<div style="width:900px;">  
-                <h3 align="center">Total Sales by Area</h3>  
+                <h3 align="center">Total Sales by Month</h3>  
                 <br />  
-                <div id="piechart" style="width: 900px; height: 500px;"></div>  
+               <div id="piechart" style="width: 900px; height: 500px;"></div>  
            </div>  
          
 

@@ -53,11 +53,11 @@
 		
 		<h3>Add Sales Record</h3>
 		<br>
-		<form>
+		<form action="addsales.php" method="POST">
 			<label form ="products">Please Select Product:</label>
 			<select name="products" id="products">
 			<?php
-				$conn =  mysqli_connect('localhost','root','', 'company');
+				$conn =  mysqli_connect('localhost','root','', 'safeway');
 				$product = $conn->query("SELECT product_name FROM products");
 				
 				while($rows = $product->fetch_assoc())
@@ -142,7 +142,7 @@
 
 			<br><br>
 			<div style="text-align:center;">
-			<input type="submit" id="submit" name="Submit">
+			<input type="submit" id="addsales" name="addsales">
 			</div>
 			
 			<br><br>
@@ -152,25 +152,25 @@
 		if (isset($_POST['addsales']))
 		{
 			$products = $_POST['products'];
-			$price = $_POST['price'];
-			$qty = $_POST['qty'];
-			$branch = $_POST['branch'];
-			$total = $_POST['total'];
-			$staff = $_POST['staff'];
+            $price = $_POST['price'];
+            $qty = $_POST['qty'];
+            $branch = $_POST['branch'];
+            $total = $_POST['total'];
+            $staff = $_POST['staff'];
 
-			$date = date("Y-m-d H:i:s");
+            $date = date("Y-m-d H:i:s");
+            $sid= '';
 
+            $sql = "INSERT INTO sales VALUES ('$date', '$qty', '$total', '$branch', '$staff', '$products','$sid')";
 
-			$sql = "INSERT INTO sales VALUES ('$date', '$qty', '$total', '$branch', '$staff', '$products')";
-
-			if(mysqli_query($conn, $sql))
-			{
-				echo "<p> Sales Data Stored Sucessfully</p>";
-			}
-			else
-			{
-				echo "<p> Problem with storing sales data </p>";
-			}
+            if(mysqli_query($conn, $sql))
+            {
+                echo "<p> Sales Data Stored Sucessfully</p>";
+            }
+            else
+            {
+                echo "<p> Problem with storing sales data </p>";
+            }
 
 		
 		}

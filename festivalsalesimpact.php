@@ -59,7 +59,7 @@
 					<th>Sales Total (RM)</th>
 					</tr>
 					<?php
-					$conn = mysqli_connect("localhost", "root", "", "company");
+					$conn = mysqli_connect("localhost", "root", "", "safeway");
 					// Check connection
 					if ($conn->connect_error) {
 					die("Connection failed: " . $conn->connect_error);

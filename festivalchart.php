@@ -3,6 +3,7 @@
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +17,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <?php  
-				 $connect = mysqli_connect("localhost", "root", "", "company");  
+				 $connect = mysqli_connect("localhost", "root", "", "safeway");  
 				 $query = "SELECT sales_total,festival FROM festival group by festival";
 				 $result = mysqli_query($connect, $query);  
 ?>  
 
- 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+ 		   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  

@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="style/style.css">
 
-<title>Safeway Solutions </title>
+<title>Safeway Solutions</title>
 </head>
 
 <body>
@@ -50,31 +50,32 @@
         <h1 class="text-center display-4" style="margin-top: -60px;font-size: 2rem"><?=$_SESSION['user_full_name']?></h1>
         <a href="logout.php" class="btn btn-warning">LOGOUT</a>
         <br>
-		<?php
-			echo "2021-11-01: Sales lower than previous month by RM 2845.00";
-		?>
+		
 		<br><br>
         <div class="table_container">
 
 				<table>
 				<tr>
-				<th>Sales Month</th>
+				<th>Product Name</th>
 				<th>Sales Date</th>
 				<th>Sales Location</th>
 				<th>Sales Total (RM)</th>
+				<th>Sales Quantity</th>
+				<th>Staff Name</th>
 				</tr>
+
 				<?php
 				$conn = mysqli_connect("localhost", "root", "", "safeway");
 				// Check connection
 				if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
 				}
-				$sql = "SELECT * FROM monthly";
+				$sql = "SELECT * FROM sales";
 				$result = $conn->query($sql);
 				if ($result !== false && $result->num_rows > 0) {
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
-				echo "<tr><td>" . $row["month"]. "</td><td>" . $row["sales_date"] . "</td><td>" . $row["sales_location"] . "</td><td>" . $row["sales_total"]. "</td></tr>";
+				echo "<tr><td>" . $row["product_name"]. "</td><td>" . $row["sales_date"] . "</td><td>" . $row["sales_location"] . "</td><td>" . $row["sales_total"]. "</td><td>" . $row["sales_quantity"]. "</td><td>" . $row["staff_username"]. "</td> </tr>";
 				}
 				echo "</table>";
 				} else { echo "0 results"; }
